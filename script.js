@@ -29,9 +29,16 @@ function sauvegarderTaches() {
 }
 
 function chargerTaches() {
-  const donnees = localStorage.getItem(STORAGE_KEY);
-  if (donnees) {
-    taches = JSON.parse(donnees);
+  try {
+    const donnees = localStorage.getItem(STORAGE_KEY);
+    if (donnees) {
+      taches = JSON.parse(donnees);
+    }
+  } catch {
+    // si le localStorage est corrompu
+    taches = [];
+    sauvegarderTaches();
+    afficherTaches();
   }
 }
 
@@ -72,6 +79,8 @@ function ajouterTache(titre, description, statut) {
     description: description.trim(),
     statut: statut,
     date: new Date().toLocaleDateString("fr-FR"),
+    createdAt: new Date().toISOString(),
+    couleur: obtenirCouleurStatut(statut),
   };
   taches.push(nouvelleTache);
   idNouvelleTache = nouvelleTache.id;
@@ -197,7 +206,7 @@ function filtrerTaches() {
 function creerCarteTache(tache) {
   const carte = document.createElement("article");
   carte.className = "carte";
-  carte.dataset.couleur = obtenirCouleurStatut(tache.statut);
+  carte.dataset.couleur = tache.couleur;
 
   if (tache.id === idEnCoursEdition) {
     carte.classList.add("en-edition");
