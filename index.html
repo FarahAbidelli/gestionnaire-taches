@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionnaire de tâches</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="entete">
+        <h1>Gestionnaire de tâches</h1>
+        <p>Ajoutez, suivez et organisez vos tâches. Tout est enregistré dans votre navigateur.</p>
+    </header>
+
+    <main class="contenu">
+
+        <!-- Formulaire : ajout et modification d'une tâche -->
+        <section class="panneau" aria-labelledby="titre-formulaire">
+            <h2 id="titre-formulaire">Nouvelle tâche</h2>
+
+            <form id="form-tache" novalidate>
+                <div class="champ">
+                    <label for="titre">Titre <span class="obligatoire" aria-hidden="true">*</span></label>
+                    <input type="text" id="titre" name="titre" maxlength="80" autocomplete="off"
+                        placeholder="Ex : Réviser le cours de JavaScript">
+                </div>
+
+                <div class="champ">
+                    <label for="description">Description <span class="facultatif">(facultative)</span></label>
+                    <textarea id="description" name="description" rows="4" maxlength="500"
+                        placeholder="Détails, liens, remarques…"></textarea>
+                </div>
+
+                <div class="champ">
+                    <label for="statut">Statut</label>
+                    <select id="statut" name="statut">
+                        <option value="à faire">À faire</option>
+                        <option value="en cours">En cours</option>
+                        <option value="terminée">Terminée</option>
+                        <option value="bloquée">Bloquée</option>
+                    </select>
+                </div>
+
+                <!-- Message d'erreur de validation -->
+                <p id="message-erreur" class="message-erreur" role="alert"></p>
+
+                <div class="boutons">
+                    <button type="submit" id="btn-valider" class="btn btn-principal">Ajouter la tâche</button>
+                    <button type="button" id="btn-annuler" class="btn btn-secondaire" hidden>Annuler</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Liste : recherche, filtres et cartes -->
+        <section class="zone-liste" aria-labelledby="titre-liste">
+            <h2 id="titre-liste" class="visuellement-cache">Liste des tâches</h2>
+
+            <div class="outils">
+                <div class="champ">
+                    <label for="recherche">Rechercher</label>
+                    <input type="search" id="recherche" placeholder="Rechercher dans le titre ou la description…">
+                </div>
+
+                <div class="filtres" role="group" aria-label="Filtrer par statut">
+                    <button type="button" class="filtre actif" data-filtre="toutes">Toutes <span
+                            class="compteur">0</span></button>
+                    <button type="button" class="filtre" data-filtre="à faire">À faire <span
+                            class="compteur">0</span></button>
+                    <button type="button" class="filtre" data-filtre="en cours">En cours <span
+                            class="compteur">0</span></button>
+                    <button type="button" class="filtre" data-filtre="terminée">Terminées <span
+                            class="compteur">0</span></button>
+                    <button type="button" class="filtre" data-filtre="bloquée">Bloquées <span
+                            class="compteur">0</span></button>
+                </div>
+            </div>
+
+            <!-- Message affiché quand il n'y a aucune tâche à montrer -->
+            <p id="message-vide" class="message-vide" hidden></p>
+
+            <!-- Les cartes sont générées en JavaScript -->
+            <div id="liste-taches" class="liste-taches"></div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

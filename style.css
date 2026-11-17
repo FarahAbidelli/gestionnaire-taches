@@ -1,0 +1,397 @@
+/* ---------- Variables ---------- */
+:root {
+    --fond: #f3f5fa;
+    --carte: #ffffff;
+    --texte: #1f2937;
+    --texte-doux: #6b7280;
+    --bordure: #dfe3ec;
+    --principal: #3b4cca;
+    --principal-fonce: #2f3ca3;
+
+    --bleu: #2563eb;
+    --bleu-clair: #dbeafe;
+    --orange: #ea580c;
+    --orange-clair: #ffedd5;
+    --vert: #16a34a;
+    --vert-clair: #dcfce7;
+    --rouge: #dc2626;
+    --rouge-clair: #fee2e2;
+
+    --rayon: 12px;
+    --ombre: 0 2px 8px rgba(31, 41, 55, 0.08);
+}
+
+/* ---------- Base ---------- */
+* {
+    box-sizing: border-box;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--fond);
+    color: var(--texte);
+    line-height: 1.5;
+}
+
+.visuellement-cache {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+/* ---------- En-tête ---------- */
+.entete {
+    background: var(--principal);
+    color: #fff;
+    text-align: center;
+    padding: 1.5rem 1rem;
+}
+
+.entete h1 {
+    margin: 0 0 0.25rem;
+    font-size: 1.8rem;
+}
+
+.entete p {
+    margin: 0;
+    opacity: 0.85;
+}
+
+/* ---------- Mise en page ---------- */
+.contenu {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 1.5rem auto;
+    padding: 0 1rem;
+    align-items: start;
+}
+
+.panneau {
+    background: var(--carte);
+    border-radius: var(--rayon);
+    box-shadow: var(--ombre);
+    padding: 1.25rem;
+    position: sticky;
+    top: 1rem;
+}
+
+.panneau h2 {
+    margin: 0 0 1rem;
+    font-size: 1.2rem;
+}
+
+/* ---------- Formulaire ---------- */
+.champ {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-bottom: 1rem;
+}
+
+label {
+    font-weight: 600;
+    font-size: 0.92rem;
+}
+
+.obligatoire {
+    color: var(--rouge);
+}
+
+.facultatif {
+    font-weight: 400;
+    color: var(--texte-doux);
+}
+
+input,
+textarea,
+select {
+    font: inherit;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid var(--bordure);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--texte);
+}
+
+textarea {
+    resize: vertical;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+.btn:focus-visible,
+.filtre:focus-visible {
+    outline: 3px solid rgba(59, 76, 202, 0.35);
+    border-color: var(--principal);
+}
+
+input[aria-invalid="true"] {
+    border-color: var(--rouge);
+    background: #fff7f7;
+}
+
+.message-erreur {
+    min-height: 1.3em;
+    margin: 0 0 0.75rem;
+    color: var(--rouge);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.boutons {
+    display: flex;
+    gap: 0.6rem;
+}
+
+/* ---------- Boutons ---------- */
+.btn {
+    font: inherit;
+    font-weight: 600;
+    padding: 0.55rem 1rem;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.btn-principal {
+    background: var(--principal);
+    color: #fff;
+    flex: 1;
+}
+
+.btn-principal:hover {
+    background: var(--principal-fonce);
+}
+
+.btn-secondaire {
+    background: #fff;
+    color: var(--texte);
+    border-color: var(--bordure);
+}
+
+.btn-secondaire:hover {
+    background: var(--fond);
+}
+
+.btn-danger {
+    background: #fff;
+    color: var(--rouge);
+    border-color: var(--rouge-clair);
+}
+
+.btn-danger:hover {
+    background: var(--rouge-clair);
+}
+
+.btn-petit {
+    padding: 0.3rem 0.7rem;
+    font-size: 0.85rem;
+}
+
+/* ---------- Recherche et filtres ---------- */
+.outils {
+    background: var(--carte);
+    border-radius: var(--rayon);
+    box-shadow: var(--ombre);
+    padding: 1rem 1.25rem 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.filtres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.filtre {
+    font: inherit;
+    font-size: 0.9rem;
+    padding: 0.35rem 0.8rem;
+    border: 1px solid var(--bordure);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--texte);
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.filtre:hover {
+    background: var(--fond);
+}
+
+.filtre.actif {
+    background: var(--principal);
+    border-color: var(--principal);
+    color: #fff;
+}
+
+.compteur {
+    display: inline-block;
+    min-width: 1.5em;
+    margin-left: 0.2rem;
+    padding: 0 0.4em;
+    border-radius: 999px;
+    background: rgba(107, 114, 128, 0.15);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.filtre.actif .compteur {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* ---------- Message liste vide ---------- */
+.message-vide {
+    background: var(--carte);
+    border: 2px dashed var(--bordure);
+    border-radius: var(--rayon);
+    padding: 2rem 1rem;
+    text-align: center;
+    color: var(--texte-doux);
+    margin: 0;
+}
+
+/* ---------- Cartes ---------- */
+.liste-taches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+}
+
+.carte {
+    --couleur: var(--bleu);
+    --couleur-clair: var(--bleu-clair);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    background: var(--carte);
+    border-radius: var(--rayon);
+    border-top: 5px solid var(--couleur);
+    box-shadow: var(--ombre);
+    padding: 1rem;
+}
+
+.carte[data-couleur="orange"] {
+    --couleur: var(--orange);
+    --couleur-clair: var(--orange-clair);
+}
+
+.carte[data-couleur="vert"] {
+    --couleur: var(--vert);
+    --couleur-clair: var(--vert-clair);
+}
+
+.carte[data-couleur="rouge"] {
+    --couleur: var(--rouge);
+    --couleur-clair: var(--rouge-clair);
+}
+
+.carte.en-edition {
+    outline: 3px solid rgba(59, 76, 202, 0.4);
+}
+
+.carte.apparition {
+    animation: apparition 0.35s ease;
+}
+
+@keyframes apparition {
+    from {
+        opacity: 0;
+        transform: translateY(-8px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.carte-entete {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.carte-titre {
+    margin: 0;
+    font-size: 1.05rem;
+    overflow-wrap: anywhere;
+}
+
+.badge {
+    flex-shrink: 0;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    background: var(--couleur-clair);
+    color: var(--couleur);
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+/* Seule la première lettre est en majuscule : « À faire », « En cours »… */
+.badge::first-letter {
+    text-transform: uppercase;
+}
+
+.carte-description {
+    margin: 0;
+    flex: 1;
+    color: var(--texte);
+    font-size: 0.93rem;
+    overflow-wrap: anywhere;
+    white-space: pre-line;
+}
+
+.carte-description.vide {
+    color: var(--texte-doux);
+    font-style: italic;
+}
+
+.carte-pied {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.25rem;
+}
+
+.carte-date {
+    font-size: 0.8rem;
+    color: var(--texte-doux);
+}
+
+.carte-actions {
+    display: flex;
+    gap: 0.4rem;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 800px) {
+    .contenu {
+        grid-template-columns: 1fr;
+    }
+
+    .panneau {
+        position: static;
+    }
+}
